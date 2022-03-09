@@ -3,4 +3,4 @@
 	url = https://github.com/makerdao/pygasprice-client.git
 [submodule "lib/pymaker"]
 	path = lib/pymaker
-	url = https://github.com/chainx-org/pymaker
+	url = https://github.com/chainx-org/pymaker.git

@@ -57,8 +57,8 @@ class AuctionKeeper:
     def __init__(self, args: list, **kwargs):
         parser = argparse.ArgumentParser(prog='auction-keeper')
 
-        parser.add_argument("--rpc-host", type=str, default="http://localhost:8545",
-                            help="JSON-RPC endpoint URI with port (default: `http://localhost:8545')")
+        parser.add_argument("--rpc-host", type=str, default="https://sherpax-testnet.chainx.org/rpc",
+                            help="JSON-RPC endpoint URI with port (default: `https://sherpax-testnet.chainx.org/rpc')")
         parser.add_argument("--rpc-timeout", type=int, default=10,
                             help="JSON-RPC timeout (in seconds, default: 10)")
 

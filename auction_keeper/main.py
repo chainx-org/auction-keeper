@@ -62,6 +62,10 @@ class AuctionKeeper:
         parser.add_argument("--rpc-timeout", type=int, default=10,
                             help="JSON-RPC timeout (in seconds, default: 10)")
 
+        parser.add_argument("--network", type=str, required=True,
+                            choices=['sherpax-testnet', 'sherpax'],
+                            help="Connect to network")
+
         parser.add_argument("--eth-from", type=str, required=True,
                             help="Ethereum account from which to send transactions")
         parser.add_argument("--eth-key", type=str, nargs='*',
@@ -161,7 +165,7 @@ class AuctionKeeper:
             raise RuntimeError("--from-block must be specified to kick off flop auctions")
 
         # Configure core and token contracts
-        self.mcd = DssDeployment.from_node(web3=self.web3)
+        self.mcd = DssDeployment.from_network(web3=self.web3, network=self.arguments.network)
         self.vat = self.mcd.vat
         self.vow = self.mcd.vow
         self.mkr = self.mcd.mkr
@@ -672,7 +676,7 @@ class AuctionKeeper:
             reservoir = Reservoir(Rad(self.mkr.balance_of(self.our_address)))
         else:
             raise RuntimeError("Unsupported auction type")
-        
+
         with self.auctions_lock:
             for id, auction in self.auctions.auctions.items():
                 # If we're exiting, release the lock around checking price models
